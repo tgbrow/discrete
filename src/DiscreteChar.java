@@ -7,9 +7,13 @@ public abstract class DiscreteChar {
 
     protected ArrayList<DiscreteUnit> units;
 
-    public abstract List<DiscreteUnit> getUnits();
+    public final List<DiscreteUnit> getUnits() {
+        return List.copyOf(units);
+    }
+
+    public final String toString() {
+        return getPrinter().stringForm(this);
+    }
 
     public abstract DiscretePrinter getPrinter();
-    
-    public abstract String toString();
 }

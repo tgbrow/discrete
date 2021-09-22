@@ -5,11 +5,14 @@ public class DiscretePrinter {
     private int numRows;
     private int numColumns;
     private char blankChar;
+    // If true, add an extra space between each DiscreteChar.
+    private boolean spaceBetween;
 
-    public DiscretePrinter(int numRows, int numColumns, char blankChar) {
+    public DiscretePrinter(int numRows, int numColumns, char blankChar, boolean spaceBetween) {
         this.numRows = numRows;
         this.numColumns = numColumns;
         this.blankChar = blankChar;
+        this.spaceBetween = spaceBetween;
     }
 
     public String stringForm(DiscreteChar dChar) {
@@ -35,6 +38,7 @@ public class DiscretePrinter {
                         sb.append(blankChar);
                         ++column;
                     }
+                    if (spaceBetween) sb.append(blankChar);
                     // Update state to beginning of new row.
                     column = 0;
                     ++row;
@@ -51,6 +55,13 @@ public class DiscretePrinter {
                 sb.append(charRepresentation(unit));
                 ++column;
             }
+
+            // Fill any remaining columns of the final row.
+            while (column < numColumns) {
+                sb.append(blankChar);
+                ++column;
+            }
+            if (spaceBetween) sb.append(blankChar);
         }
 
         StringBuilder result = sbs[0];

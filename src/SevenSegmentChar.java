@@ -1,8 +1,7 @@
-import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SevenSegmentChar extends DiscreteChar {
     /**
@@ -37,8 +36,8 @@ public class SevenSegmentChar extends DiscreteChar {
     private static final char HORIZONTAL = '_';
     private static final char VERTICAL   = '|';
 
-    private static final DiscreteUnit[] DEFAULT_SEGMENTS = {
-        //           id, row, col, representation
+    private static final DiscreteUnit[] DEFAULT_UNITS = {
+        //                id, row, col, representation
         new DiscreteUnit( 0,  0,   1,   HORIZONTAL    ),
         new DiscreteUnit( 1,  1,   0,   VERTICAL      ),
         new DiscreteUnit( 2,  1,   1,   HORIZONTAL    ),
@@ -48,7 +47,8 @@ public class SevenSegmentChar extends DiscreteChar {
         new DiscreteUnit( 6,  2,   2,   VERTICAL      ),
     };
 
-    private static final DiscretePrinter PRINTER = new DiscretePrinter(NUM_ROWS, NUM_COLUMNS, BLANK);
+    private static final DiscretePrinter PRINTER =
+        new DiscretePrinter(NUM_ROWS, NUM_COLUMNS, BLANK, false);
 
     // Each of the following arrays holds the segment on/off configuration
     // that will produce the specified character.
@@ -95,7 +95,7 @@ public class SevenSegmentChar extends DiscreteChar {
 
     // A map for easily looking up the segment on/off configuration that
     // corresponds to a given character.
-    private static final Map<Character, boolean[]> CHAR_TO_SEG_CONFIG;
+    private static final Map<Character, boolean[]> CHAR_TO_CONFIG;
     static {
         Map<Character, boolean[]> m = new HashMap<>();
         // Digits
@@ -118,11 +118,11 @@ public class SevenSegmentChar extends DiscreteChar {
         // Misc
         m.put(' ', SPACE);
         m.put('-', DASH);
-        CHAR_TO_SEG_CONFIG = Collections.unmodifiableMap(m);
+        CHAR_TO_CONFIG = Collections.unmodifiableMap(m);
     }
 
     public SevenSegmentChar(char c) {
-        boolean[] config = CHAR_TO_SEG_CONFIG.get(Character.toUpperCase(c));
+        boolean[] config = CHAR_TO_CONFIG.get(Character.toUpperCase(c));
         if (config == null) {
             throw new IllegalArgumentException(
                 String.format("Character \'%c\' not supported.", c));
@@ -130,24 +130,14 @@ public class SevenSegmentChar extends DiscreteChar {
 
         units = new ArrayList<>();
         for (int i = 0; i < NUM_SEGMENTS; ++i) {
-            DiscreteUnit seg = DiscreteUnit.copyOf(DEFAULT_SEGMENTS[i]);
+            DiscreteUnit seg = DiscreteUnit.copyOf(DEFAULT_UNITS[i]);
             seg.setIsOn(config[i]);
             units.add(seg);
         }
     }
 
     @Override
-    public List<DiscreteUnit> getUnits() {
-        return List.copyOf(units);
-    }
-
-    @Override
     public DiscretePrinter getPrinter() {
         return PRINTER;
-    }
-
-    @Override
-    public String toString() {
-        return PRINTER.stringForm(this);
     }
 }

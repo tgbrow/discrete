@@ -19,15 +19,23 @@ public class TestDiscreteStuff {
             int x = max - r.nextInt(2*max);
             intTest(x);
         }
+
+        String s = "teddy madi";
+        DiscreteString dStr = DiscreteString.create(DiscreteCharType.PIXEL_24_CHAR, s);
+        print(s, dStr.toString());
     }
 
     private static void stringTest(String s) {
         DiscreteString dStr = DiscreteString.create(DiscreteCharType.SEVEN_SEGMENT_CHAR, s);
-        System.out.print(String.format("%s:\n%s\n\n", s, dStr));
+        print(s, dStr.toString());
     }
 
     private static void intTest(int n) {
         DiscreteString dStr = DiscreteString.create(DiscreteCharType.SEVEN_SEGMENT_CHAR, n);
-        System.out.print(String.format("%d:\n%s\n\n", n, dStr));
+        print(String.valueOf(n), dStr.toString());
+    }
+
+    private static void print(String in, String out) {
+        System.out.print(String.format("%s:\n%s\n\n", in, out));
     }
 }
