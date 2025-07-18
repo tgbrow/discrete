@@ -1,3 +1,5 @@
+package com.tgbrow.discrete;
+
 import java.util.Random;
 
 public class TestDiscreteStuff {
@@ -20,7 +22,7 @@ public class TestDiscreteStuff {
             intTest(x);
         }
 
-        String s = "teddy madi";
+        String s = "teddy made it";
         DiscreteString dStr = DiscreteString.create(DiscreteCharType.PIXEL_24_CHAR, s);
         print(s, dStr.toString());
     }

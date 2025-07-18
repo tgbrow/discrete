@@ -1,3 +1,5 @@
+package com.tgbrow.discrete;
+
 import java.util.List;
 
 public class DiscretePrinter {

@@ -1,3 +1,5 @@
+package com.tgbrow.discrete;
+
 import java.util.ArrayList;
 import java.util.List;
 

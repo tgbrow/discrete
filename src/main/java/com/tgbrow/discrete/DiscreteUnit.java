@@ -1,3 +1,5 @@
+package com.tgbrow.discrete;
+
 public class DiscreteUnit {
     private int id;
     private int row;

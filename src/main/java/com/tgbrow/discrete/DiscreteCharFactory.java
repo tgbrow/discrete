@@ -1,3 +1,5 @@
+package com.tgbrow.discrete;
+
 public class DiscreteCharFactory {
     private DiscreteCharType type;
 
